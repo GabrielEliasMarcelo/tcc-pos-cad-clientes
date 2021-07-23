@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadastroClientes", "CadastroClientes.csproj", "{68D77888-4A1C-4C3A-B1DE-D19C8DAFBE0F}"
+<<<<<<< HEAD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroClientesServices", "CadastroClientesServices\CadastroClientesServices.csproj", "{D0EDE419-446F-4FA8-BC23-7F7CFFFC260B}"
+=======
+>>>>>>> 96eb634f41e85666ac363534fc318842700a0c09
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
