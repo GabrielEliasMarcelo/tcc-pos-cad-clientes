@@ -1,19 +1,18 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace CadastroClientes
 {
+	using CadastroClientesServices.BizServices;
+	using CadastroClientesServices.BizServices.Interface;
+	using CadastroClientesServices.EntityServices;
+	using CadastroClientesServices.EntityServices.Interfaces;
+	using CadastroClientesServices.Model;
+	using Microsoft.AspNetCore.Builder;
+	using Microsoft.AspNetCore.Hosting;
+	using Microsoft.EntityFrameworkCore;
+	using Microsoft.Extensions.Configuration;
+	using Microsoft.Extensions.DependencyInjection;
+	using Microsoft.Extensions.Hosting;
+	using Microsoft.OpenApi.Models;
+
 	public class Startup
 	{
 		public Startup(IConfiguration configuration)
@@ -26,12 +25,20 @@ namespace CadastroClientes
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-
+			
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "CadastroClientes", Version = "v1" });
 			});
+
+			//Temporario adicionar em um .config
+			var connection = @"Server=(localdb)\mssqllocaldb;Database=Clientes;Trusted_Connection=True;";
+			services.AddDbContext<ClientesContext>(options => options.UseSqlServer(connection));
+
+			services.AddScoped<IEnderecoBizServices, EnderecoBizServices>();
+			services.AddScoped<IEnderecoEntityServices, EnderecoEntityServices>();
+			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
