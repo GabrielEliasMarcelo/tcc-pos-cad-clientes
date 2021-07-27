@@ -2,8 +2,8 @@
 {
 	using CadastroClientesServices.EntityServices.Interfaces;
 	using CadastroClientesServices.Model;
-	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 
 	public class EnderecoEntityServices : IEnderecoEntityServices
 	{
@@ -33,23 +33,53 @@
 
 		public bool DeleteEndereco(int Id)
 		{
-			throw new System.NotImplementedException();
+			try
+			{
+				var enderecoAtualizar = _context.Enderecos.FirstOrDefault(c => c.Id ==Id);
+				enderecoAtualizar.Excluido = true;
+				_context.SaveChanges(); 
+
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
 		}
 
 		public Endereco GetEnderecoById(int Id)
 		{
-			throw new System.NotImplementedException();
+			return _context.Enderecos.FirstOrDefault(c => c.Id == Id);
 		}
 
 		public List<Endereco> GetEnderecos()
 		{
-			throw new System.NotImplementedException();
+			return _context.Enderecos.ToList();
 		}
 
 		public bool UpdateEndereco(Endereco endereco)
 		{
-			throw new System.NotImplementedException();
+			try
+			{
+				var enderecoAtualizar = _context.Enderecos.FirstOrDefault(c => c.Id == endereco.Id);
+
+				enderecoAtualizar.Id = endereco.Id;
+				enderecoAtualizar.Excluido = endereco.Excluido;
+				enderecoAtualizar.DataCadastro = endereco.DataCadastro;
+				enderecoAtualizar.DataAlteracao = endereco.DataAlteracao;
+				enderecoAtualizar.CodigoPostal = endereco.CodigoPostal;
+				enderecoAtualizar.InformacoesAdicionais = endereco.InformacoesAdicionais;
+				enderecoAtualizar.Pais = endereco.Pais;
+				enderecoAtualizar.Localizacao = endereco.Localizacao;
+
+				_context.SaveChanges();
+
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
 		}
 	}
 }
-

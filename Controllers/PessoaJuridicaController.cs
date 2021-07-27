@@ -1,5 +1,6 @@
 ﻿namespace CadastroClientes.Controllers
 {
+	using CadastroClientesServices.BizServices.Interface;
 	using Microsoft.AspNetCore.Mvc;
 	using System.Collections.Generic;
 
@@ -7,6 +8,13 @@
 	[ApiController]
 	public class PessoaJuridicaController : ControllerBase
 	{
+		private readonly IPessoaJuridicaBizService _iPessoaJuridicaBizService;
+
+		public PessoaJuridicaController(IPessoaJuridicaBizService pessoaJuridicaBizService)
+		{
+			_iPessoaJuridicaBizService = pessoaJuridicaBizService;
+		}
+
 		// GET: api/<PessoaJuridicaController>
 		[HttpGet]
 		public IEnumerable<string> Get()

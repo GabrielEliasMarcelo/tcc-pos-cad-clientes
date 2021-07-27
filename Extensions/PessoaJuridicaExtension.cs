@@ -1,18 +1,17 @@
-﻿namespace CadastroClientes.DTO
+﻿namespace CadastroClientes.Extensions
 {
+	using CadastroClientes.DTO;
 	using System;
 
-	public class PessoaFisicaDTO
+	public class PessoaJuridicaExtension
 	{
 		public int? Id { get; set; }
 
-		public string Nome { get; set; }
+		public string NomeFantasia { get; set; }
 
-		public decimal? NumeroCPF { get; set; }
+		public string CNPJ { get; set; }
 
-		public DateTime DataNascimento { get; set; }
-
-		public string Email { get; set; }
+		public string EmailResposavel { get; set; }
 
 		public int? IdEndereco { get; set; }
 
