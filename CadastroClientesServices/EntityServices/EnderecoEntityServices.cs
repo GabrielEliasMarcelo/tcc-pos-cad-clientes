@@ -2,6 +2,7 @@
 {
 	using CadastroClientesServices.EntityServices.Interfaces;
 	using CadastroClientesServices.Model;
+	using System;
 	using System.Collections.Generic;
 
 	public class EnderecoEntityServices : IEnderecoEntityServices
@@ -17,6 +18,7 @@
 		{
 			try
 			{
+				//TODO: Validar campos obrigatorios, adicionar uma info default
 				_context.Enderecos.Add(endereco);
 				_context.SaveChanges();
 				return true;
@@ -24,12 +26,12 @@
 			catch
 			{
 				return false;
-				//Adicionar log4 net
+				//TODO: Adicionar log4 net
 			}
 
 		}
 
-		public bool ExcluirEndereco(int Id)
+		public bool DeleteEndereco(int Id)
 		{
 			throw new System.NotImplementedException();
 		}

@@ -13,7 +13,7 @@
 
 		public bool UpdateEndereco(Endereco endereco);
 
-		public bool ExcluirEndereco(int Id);
+		public bool DeleteEndereco(int Id);
 
 	}
 }

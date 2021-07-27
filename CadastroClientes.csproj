@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="CadastroClientesServices\**" />
+    <Compile Remove="CadastroClientesTest\**" />
     <Content Remove="CadastroClientesServices\**" />
+    <Content Remove="CadastroClientesTest\**" />
     <EmbeddedResource Remove="CadastroClientesServices\**" />
+    <EmbeddedResource Remove="CadastroClientesTest\**" />
     <None Remove="CadastroClientesServices\**" />
+    <None Remove="CadastroClientesTest\**" />
   </ItemGroup>
 
   <ItemGroup>

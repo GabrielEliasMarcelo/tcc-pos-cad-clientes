@@ -11,25 +11,32 @@
 	[ApiController]
 	public class EnderecoController : ControllerBase
 	{
-		private readonly IEnderecoBizServices _ienderecoBizServices;
+		private readonly IEnderecoBizServices _iEnderecoBizServices;
 
 		public EnderecoController(IEnderecoBizServices ienderecoBizServices)
 		{
-			_ienderecoBizServices = ienderecoBizServices;
+			_iEnderecoBizServices = ienderecoBizServices;
 		}
 
 		// GET: api/<EnderecoController>
 		[HttpGet]
-		public IEnumerable<string> Get()
+		public List<EnderecoDTO> Get()
 		{
-			return new string[] { "value1", "value2" };
+			return _iEnderecoBizServices.GetEnderecos().ToDto();
 		}
 
 		// GET api/<EnderecoController>/5
 		[HttpGet("{id}")]
-		public string Get(int id)
+		public EnderecoDTO Get(int id)
 		{
-			return "value";
+			try
+			{
+				return _iEnderecoBizServices.GetEnderecoById(id).ToDto();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		// POST api/<EnderecoController>
@@ -38,25 +45,34 @@
 		{
 			try
 			{
-				_ienderecoBizServices.CreateEndereco(enderecoDTO.ToEndereco());
+				_iEnderecoBizServices.CreateEndereco(enderecoDTO.ToEnderecoTO());
 			}
 			catch (Exception ex)
 			{
 				throw ex;
 			}
-			
+
 		}
 
 		// PUT api/<EnderecoController>/5
-		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] string value)
+		[HttpPut]
+		public void Put([FromBody] EnderecoDTO enderecoDTO)
 		{
+			try
+			{
+				_iEnderecoBizServices.UpdateEndereco(enderecoDTO.ToEnderecoTO());
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		// DELETE api/<EnderecoController>/5
 		[HttpDelete("{id}")]
 		public void Delete(int id)
 		{
+			_iEnderecoBizServices.DeleteEnderco(id);
 		}
 	}
 }
