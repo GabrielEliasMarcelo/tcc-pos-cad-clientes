@@ -18,7 +18,6 @@
 		{
 			try
 			{
-				//TODO: Validar campos obrigatorios, adicionar uma info default
 				_context.Enderecos.Add(endereco);
 				_context.SaveChanges();
 				return true;
@@ -31,13 +30,21 @@
 
 		}
 
+		public int SaveEndereco(Endereco endereco)
+		{
+			_context.Enderecos.Add(endereco);
+			_context.SaveChanges();
+
+			return endereco.Id;
+		}
+
 		public bool DeleteEndereco(int Id)
 		{
 			try
 			{
-				var enderecoAtualizar = _context.Enderecos.FirstOrDefault(c => c.Id ==Id);
+				var enderecoAtualizar = _context.Enderecos.FirstOrDefault(c => c.Id == Id);
 				enderecoAtualizar.Excluido = true;
-				_context.SaveChanges(); 
+				_context.SaveChanges();
 
 				return true;
 			}

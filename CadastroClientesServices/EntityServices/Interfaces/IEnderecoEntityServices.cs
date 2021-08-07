@@ -15,5 +15,6 @@
 
 		public bool DeleteEndereco(int Id);
 
+		public int SaveEndereco(Endereco endereco);
 	}
 }

@@ -1,8 +1,7 @@
 ﻿namespace CadastroClientes.Controllers
 {
-	using CadastroClientes.DTO;
-	using CadastroClientes.Extensions;
 	using CadastroClientesServices.BizServices.Interface;
+	using CadastroClientesServices.TO;
 	using Microsoft.AspNetCore.Mvc;
 	using System;
 	using System.Collections.Generic;
@@ -20,18 +19,18 @@
 
 		// GET: api/<EnderecoController>
 		[HttpGet]
-		public List<EnderecoDTO> Get()
+		public List<EnderecoTO> Get()
 		{
-			return _iEnderecoBizServices.GetEnderecos().ToDto();
+			return _iEnderecoBizServices.GetEnderecos();
 		}
 
 		// GET api/<EnderecoController>/5
 		[HttpGet("{id}")]
-		public EnderecoDTO Get(int id)
+		public EnderecoTO Get(int id)
 		{
 			try
 			{
-				return _iEnderecoBizServices.GetEnderecoById(id).ToDto();
+				return _iEnderecoBizServices.GetEnderecoById(id);
 			}
 			catch (Exception ex)
 			{
@@ -41,11 +40,11 @@
 
 		// POST api/<EnderecoController>
 		[HttpPost]
-		public void Post([FromBody] EnderecoDTO enderecoDTO)
+		public void Post([FromBody] EnderecoTO enderecoDTO)
 		{
 			try
 			{
-				_iEnderecoBizServices.CreateEndereco(enderecoDTO.ToEnderecoTO());
+				_iEnderecoBizServices.CreateEndereco(enderecoDTO);
 			}
 			catch (Exception ex)
 			{
@@ -56,11 +55,11 @@
 
 		// PUT api/<EnderecoController>/5
 		[HttpPut]
-		public void Put([FromBody] EnderecoDTO enderecoDTO)
+		public void Put([FromBody] EnderecoTO enderecoDTO)
 		{
 			try
 			{
-				_iEnderecoBizServices.UpdateEndereco(enderecoDTO.ToEnderecoTO());
+				_iEnderecoBizServices.UpdateEndereco(enderecoDTO);
 			}
 			catch (Exception ex)
 			{

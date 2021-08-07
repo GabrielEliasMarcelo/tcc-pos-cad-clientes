@@ -7,7 +7,7 @@
 	{
 		public PessoaFisicaTO GetPessoaFisicaById(int Id);
 
-		public List<PessoaFisicaTO> GetPessoaFisica();
+		public List<PessoaFisicaTO> GetPessoasFisica();
 
 		public bool CreatePessoaFisica(PessoaFisicaTO pessoaFisica);
 

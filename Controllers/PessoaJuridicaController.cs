@@ -1,7 +1,9 @@
 ﻿namespace CadastroClientes.Controllers
 {
 	using CadastroClientesServices.BizServices.Interface;
+	using CadastroClientesServices.TO;
 	using Microsoft.AspNetCore.Mvc;
+	using System;
 	using System.Collections.Generic;
 
 	[Route("api/[controller]")]
@@ -17,34 +19,73 @@
 
 		// GET: api/<PessoaJuridicaController>
 		[HttpGet]
-		public IEnumerable<string> Get()
+		public List<PessoaJuridicaTO> Get()
 		{
-			return new string[] { "value1", "value2" };
+			try
+			{
+				return _iPessoaJuridicaBizService.GetPessoaJuridica();
+			}
+			catch (Exception ex)
+			{ 
+				throw ex;
+			}
 		}
 
 		// GET api/<PessoaJuridicaController>/5
 		[HttpGet("{id}")]
-		public string Get(int id)
+		public PessoaJuridicaTO Get(int id)
 		{
-			return "value";
+			try
+			{
+				return _iPessoaJuridicaBizService.GetPessoaJuridicaById(id);
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
 		}
 
 		// POST api/<PessoaJuridicaController>
 		[HttpPost]
-		public void Post([FromBody] string value)
+		public void Post([FromBody] PessoaJuridicaTO value)
 		{
+			try
+			{
+				_iPessoaJuridicaBizService.CreatePessoaJuridica(value);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		// PUT api/<PessoaJuridicaController>/5
 		[HttpPut]
-		public void Put([FromBody] string value)
+		public void Put([FromBody] PessoaJuridicaTO value)
 		{
+			try
+			{
+				_iPessoaJuridicaBizService.UpdatePessoaJuridica(value);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		// DELETE api/<PessoaJuridicaController>/5
 		[HttpDelete("{id}")]
 		public void Delete(int id)
 		{
+			try
+			{
+				_iPessoaJuridicaBizService.DeletePessoaJuridica(id);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 	}
 }

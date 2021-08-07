@@ -1,8 +1,7 @@
 ﻿namespace CadastroClientes.Controllers
 {
-	using CadastroClientes.DTO;
-	using CadastroClientes.Extensions;
 	using CadastroClientesServices.BizServices.Interface;
+	using CadastroClientesServices.TO;
 	using Microsoft.AspNetCore.Mvc;
 	using System;
 	using System.Collections.Generic;
@@ -20,18 +19,25 @@
 
 		// GET: api/<PessoaFisicaController>
 		[HttpGet]
-		public IEnumerable<string> Get()
+		public List<PessoaFisicaTO> Get()
 		{
-			return new string[] { "value1", "value2" };
+			try
+			{
+				return _iPessoaFisicaBizService.GetPessoasFisica();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		// GET api/<PessoaFisicaController>/5
 		[HttpGet("{id}")]
-		public PessoaFisicaDTO Get(int id)
+		public PessoaFisicaTO Get(int id)
 		{
 			try
 			{
-				return _iPessoaFisicaBizService.GetPessoaFisicaById(id).ToPfDTO();
+				return _iPessoaFisicaBizService.GetPessoaFisicaById(id);
 			}
 			catch (Exception ex)
 			{
@@ -41,21 +47,44 @@
 
 		// POST api/<PessoaFisicaController>
 		[HttpPost]
-		public void Post([FromBody] PessoaFisicaDTO pessoaFisicaDTO)
+		public void Post([FromBody] PessoaFisicaTO pessoaFisicaDTO)
 		{
-
+			try
+			{
+				_iPessoaFisicaBizService.CreatePessoaFisica(pessoaFisicaDTO);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		// PUT api/<PessoaFisicaController>/5
 		[HttpPut]
-		public void Put([FromBody] PessoaFisicaDTO pessoaFisicaDTO)
+		public void Put([FromBody] PessoaFisicaTO pessoaFisicaDTO)
 		{
+			try
+			{
+				_iPessoaFisicaBizService.UpdatePessoaFisica(pessoaFisicaDTO);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		// DELETE api/<PessoaFisicaController>/5
 		[HttpDelete("{id}")]
 		public void Delete(int id)
 		{
+			try
+			{
+				_iPessoaFisicaBizService.DeletePessoaFisica(id);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 	}
 }

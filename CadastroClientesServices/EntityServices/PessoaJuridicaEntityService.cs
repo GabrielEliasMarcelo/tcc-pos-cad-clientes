@@ -3,32 +3,82 @@
 	using CadastroClientesServices.EntityServices.Interfaces;
 	using CadastroClientesServices.Model;
 	using System.Collections.Generic;
- 
+	using System.Linq;
+
 	public class PessoaJuridicaEntityService : IPessoaJuridicaEntityService
 	{
+		private readonly ClientesContext _context;
+
+		public PessoaJuridicaEntityService(ClientesContext context)
+		{
+			_context = context;
+		}
+
 		public bool CreatePessoaJuridica(PessoaJuridica pessoaJuridica)
 		{
-			throw new System.NotImplementedException();
+			try
+			{
+				_context.PessoaJuridicas.Add(pessoaJuridica);
+				_context.SaveChanges();
+				return true;
+			}
+			catch
+			{
+
+				return false;
+			}
 		}
 
 		public bool DeletePessoaJuridica(int Id)
 		{
-			throw new System.NotImplementedException();
+			try
+			{
+				var pessoaJuridica = _context.PessoaJuridicas.FirstOrDefault(c => c.Id == Id);
+				pessoaJuridica.Excluido = true;
+				_context.SaveChanges();
+				return true;
+			}
+			catch
+			{
+
+				return false;
+			}
 		}
 
 		public List<PessoaJuridica> GetPessoaJuridica()
 		{
-			throw new System.NotImplementedException();
+			return _context.PessoaJuridicas.ToList();
 		}
 
 		public PessoaJuridica GetPessoaJuridicaById(int Id)
 		{
-			throw new System.NotImplementedException();
+			return _context.PessoaJuridicas.FirstOrDefault(c => c.Id == Id);
 		}
 
 		public bool UpdatePessoaJuridica(PessoaJuridica pessoaJuridica)
 		{
-			throw new System.NotImplementedException();
+			try
+			{
+				var pj = _context.PessoaJuridicas.FirstOrDefault(c => c.Id == pessoaJuridica.Id);
+
+				pj.Id = pessoaJuridica.Id;
+				pj.NomeFantasia = pessoaJuridica.NomeFantasia;
+				pj.IdEndereco = pessoaJuridica.IdEndereco;
+				pj.Excluido = pessoaJuridica.Excluido;
+				pj.EmailResposavel = pessoaJuridica.EmailResposavel;
+				pj.DataCadastro = pessoaJuridica.DataCadastro;
+				pj.DataAlteracao = pessoaJuridica.DataAlteracao;
+				pj.CNPJ = pessoaJuridica.CNPJ;
+
+				_context.SaveChanges();
+
+				return true;
+			}
+			catch
+			{
+
+				return false;
+			}
 		}
 	}
 }

@@ -2,41 +2,46 @@
 {
 	using CadastroClientesServices.BizServices.Interface;
 	using CadastroClientesServices.EntityServices.Interfaces;
+	using CadastroClientesServices.Extensions;
 	using CadastroClientesServices.TO;
 	using System.Collections.Generic;
 
 	public class PessoaFisicaBizService : IPessoaFisicaBizService
 	{
 		private readonly IPessoaFisicaEntityService _iPessoaFisicaEntityService;
+		private readonly IEnderecoEntityServices _enderecoEntityServices;
 
-		public PessoaFisicaBizService(IPessoaFisicaEntityService pessoaFisicaEntityService)
+		public PessoaFisicaBizService(IPessoaFisicaEntityService pessoaFisicaEntityService, IEnderecoEntityServices enderecoEntityServices)
 		{
 			_iPessoaFisicaEntityService = pessoaFisicaEntityService;
+			_enderecoEntityServices = enderecoEntityServices;
 		}
 
 		public bool CreatePessoaFisica(PessoaFisicaTO pessoaFisica)
 		{
-			throw new System.NotImplementedException();
+			pessoaFisica.IdEndereco = _enderecoEntityServices.SaveEndereco(pessoaFisica.Endereco.ToEndereco());
+			return _iPessoaFisicaEntityService.CreatePessoaFisica(pessoaFisica.ToPF());
 		}
 
 		public bool DeletePessoaFisica(int Id)
 		{
-			throw new System.NotImplementedException();
+			return _iPessoaFisicaEntityService.DeletePessoaFisica(Id);
 		}
 
-		public List<PessoaFisicaTO> GetPessoaFisica()
+		public List<PessoaFisicaTO> GetPessoasFisica()
 		{
-			throw new System.NotImplementedException();
+			return _iPessoaFisicaEntityService.GetPessoaFisica().ToLsPFTO();
 		}
 
 		public PessoaFisicaTO GetPessoaFisicaById(int Id)
 		{
-			throw new System.NotImplementedException();
+			return _iPessoaFisicaEntityService.GetPessoaFisicaById(Id).ToPFTO();
 		}
 
 		public bool UpdatePessoaFisica(PessoaFisicaTO pessoaFisica)
 		{
-			throw new System.NotImplementedException();
+			_enderecoEntityServices.UpdateEndereco(pessoaFisica.Endereco.ToEndereco());
+			return _iPessoaFisicaEntityService.UpdatePessoaFisica(pessoaFisica.ToPF());
 		}
 	}
 }
