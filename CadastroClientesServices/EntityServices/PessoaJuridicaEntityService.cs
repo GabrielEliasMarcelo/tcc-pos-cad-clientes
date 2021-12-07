@@ -61,18 +61,25 @@
 			{
 				var pj = _context.PessoaJuridicas.FirstOrDefault(c => c.Id == pessoaJuridica.Id);
 
-				pj.Id = pessoaJuridica.Id;
-				pj.NomeFantasia = pessoaJuridica.NomeFantasia;
-				pj.IdEndereco = pessoaJuridica.IdEndereco;
-				pj.Excluido = pessoaJuridica.Excluido;
-				pj.EmailResposavel = pessoaJuridica.EmailResposavel;
-				pj.DataCadastro = pessoaJuridica.DataCadastro;
-				pj.DataAlteracao = pessoaJuridica.DataAlteracao;
-				pj.CNPJ = pessoaJuridica.CNPJ;
+				if (pj != null)
+				{
+					pj.Id = pessoaJuridica.Id;
+					pj.NomeFantasia = pessoaJuridica.NomeFantasia;
+					pj.IdEndereco = pessoaJuridica.IdEndereco;
+					pj.Excluido = pessoaJuridica.Excluido;
+					pj.EmailResposavel = pessoaJuridica.EmailResposavel;
+					pj.DataCadastro = pessoaJuridica.DataCadastro;
+					pj.DataAlteracao = pessoaJuridica.DataAlteracao;
+					pj.CNPJ = pessoaJuridica.CNPJ;
 
-				_context.SaveChanges();
+					_context.SaveChanges();
 
-				return true;
+					return true;
+				}
+                else
+                {
+					return false;
+                }
 			}
 			catch
 			{
