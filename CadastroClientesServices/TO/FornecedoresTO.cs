@@ -1,10 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CadastroClientesServices.TO
+﻿namespace CadastroClientesServices.TO
 {
-    class FornecedoresTO
+    using CadastroClientesServices.Model;
+    using System;
+
+    public class FornecedoresTO
     {
+        public int? Id { get; set; }
+
+        public string DadosComplementares { get; set; }
+
+        public int? IdPessoaFisica { get; set; }
+
+        public PessoaFisica PessoaFisica { get; set; }
+
+        public int? IdPessoaJuridica { get; set; }
+
+        public PessoaJuridica PessoaJuridica { get; set; }
+
+        public int? IdEndereco { get; set; }
+
+        public Endereco Endereco { get; set; }
+
+        public bool? Excluido { get; set; }
+
+        public DateTime? DataCadastro { get; set; }
+
+        public DateTime? DataAlteracao { get; set; }
     }
 }
