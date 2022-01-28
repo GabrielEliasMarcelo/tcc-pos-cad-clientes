@@ -3,6 +3,7 @@
     using CadastroClientesServices.EntityServices.Interfaces;
     using CadastroClientesServices.Model;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class MercadoriasEntityService : IMercadoriasEntityService
     {
@@ -13,34 +14,68 @@
             _context = context;
         }
 
-        public bool CreateMercadorias(Mercadorias Mercadorias)
+        public bool CreateMercadorias(Mercadorias mercadorias)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _context.Mercadorias.Add(mercadorias);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool DeleteMercadorias(int Id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var depositos = _context.Mercadorias.FirstOrDefault(c => c.Id == Id);
+                depositos.Excluido = true;
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public Mercadorias GetMercadoriasById(int Id)
         {
-            throw new System.NotImplementedException();
+            return _context.Mercadorias.FirstOrDefault(c => c.Id == Id);
         }
 
         public List<Mercadorias> GetMercadoriass()
         {
-            throw new System.NotImplementedException();
+            return _context.Mercadorias.ToList();
         }
 
-        public int SaveMercadorias(Mercadorias Mercadorias)
+        public bool UpdateMercadorias(Mercadorias mercadoriasUpdate)
         {
-            throw new System.NotImplementedException();
-        }
+            try
+            {
+                var mercadoria = _context.Mercadorias.FirstOrDefault(c => c.Id == mercadoriasUpdate.Id);
 
-        public bool UpdateMercadorias(Mercadorias Mercadorias)
-        {
-            throw new System.NotImplementedException();
+                mercadoria.Excluido = mercadoriasUpdate.Excluido;
+                mercadoria.DataCadastro = mercadoriasUpdate.DataCadastro;
+                mercadoria.DataAlteracao = mercadoriasUpdate.DataAlteracao;
+                mercadoria.Excluido = mercadoriasUpdate.Excluido;
+                mercadoria.Descricao = mercadoriasUpdate.Descricao;
+                mercadoria.Valor = mercadoriasUpdate.Valor;
+
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
         }
     }
 }

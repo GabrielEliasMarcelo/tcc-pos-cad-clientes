@@ -1,34 +1,44 @@
 ﻿namespace CadastroClientesServices.BizServices
 {
     using CadastroClientesServices.BizServices.Interface;
+    using CadastroClientesServices.EntityServices.Interfaces;
+    using CadastroClientesServices.Extensions;
     using CadastroClientesServices.TO;
     using System.Collections.Generic;
 
     public class FornecedoresBizService : IFornecedoresBizServices
     {
-        public bool CreateFornecedores(FornecedoresTO FornecedoresTO)
+        private readonly IFornecedoresEntityService _fornecedoresEntityServoces;
+
+        public FornecedoresBizService(IFornecedoresEntityService fornecedoresEntityService)
         {
-            throw new System.NotImplementedException();
+            _fornecedoresEntityServoces = fornecedoresEntityService;
+        }
+
+        public bool CreateFornecedores(FornecedoresTO fornecedoresTO)
+        {
+            return _fornecedoresEntityServoces.CreateFornecedores(fornecedoresTO.ToFornecedores());
         }
 
         public bool DeleteFornecedores(int idFornecedores)
         {
-            throw new System.NotImplementedException();
+            return _fornecedoresEntityServoces.DeleteFornecedores(idFornecedores);
         }
 
         public FornecedoresTO GetFornecedoresById(int idFornecedores)
         {
-            throw new System.NotImplementedException();
+            return _fornecedoresEntityServoces.GetFornecedoresById(idFornecedores).ToFornecedoresTO();
+
         }
 
         public List<FornecedoresTO> GetFornecedoress()
         {
-            throw new System.NotImplementedException();
+            return _fornecedoresEntityServoces.GetFornecedoress().ToFornecedoresTO();
         }
 
-        public bool UpdateFornecedores(FornecedoresTO FornecedoresTO)
+        public bool UpdateFornecedores(FornecedoresTO fornecedoresTO)
         {
-            throw new System.NotImplementedException();
+            return _fornecedoresEntityServoces.UpdateFornecedores(fornecedoresTO.ToFornecedores());
         }
     }
 }

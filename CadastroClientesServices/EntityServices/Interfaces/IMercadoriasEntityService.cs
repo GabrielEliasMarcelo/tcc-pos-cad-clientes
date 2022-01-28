@@ -15,6 +15,5 @@
 
 		public bool DeleteMercadorias(int Id);
 
-		public int SaveMercadorias(Mercadorias Mercadorias);
 	}
 }

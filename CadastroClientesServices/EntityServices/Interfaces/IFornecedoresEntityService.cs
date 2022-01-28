@@ -14,7 +14,5 @@
 		public bool UpdateFornecedores(Fornecedores Fornecedores);
 
 		public bool DeleteFornecedores(int Id);
-
-		public int SaveFornecedores(Fornecedores Fornecedores);
 	}
 }

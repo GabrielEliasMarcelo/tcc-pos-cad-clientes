@@ -1,33 +1,42 @@
 ﻿namespace CadastroClientesServices.BizServices
 {
     using CadastroClientesServices.BizServices.Interface;
+    using CadastroClientesServices.EntityServices;
+    using CadastroClientesServices.Extensions;
     using CadastroClientesServices.TO;
     using System.Collections.Generic;
 
     public class DepositosBizService : IDepositosBizServices
     {
-        public bool CreateDepositos(DepositosTO DepositosTO)
+        private readonly DepositosEntityService _depositosEntityService;
+
+        public DepositosBizService(DepositosEntityService depositosEntityService)
         {
-            throw new System.NotImplementedException();
+            _depositosEntityService = depositosEntityService;
+        }
+
+        public bool CreateDepositos(DepositosTO depositosTO)
+        {
+            return _depositosEntityService.CreateDepositos(depositosTO.ToDeposito());
         }
 
         public bool DeleteDepositos(int idDepositos)
         {
-            throw new System.NotImplementedException();
+            return _depositosEntityService.DeleteDepositos(idDepositos);
         }
         public DepositosTO GetDepositosById(int idDepositos)
         {
-            throw new System.NotImplementedException();
+            return _depositosEntityService.GetDepositosById(idDepositos).ToDepositoTO();
         }
 
         public List<DepositosTO> GetDepositoss()
         {
-            throw new System.NotImplementedException();
+            return _depositosEntityService.GetDepositoss().ToDepositoTO();
         }
 
-        public bool UpdateDepositos(DepositosTO DepositosTO)
+        public bool UpdateDepositos(DepositosTO depositosTO)
         {
-            throw new System.NotImplementedException();
+            return _depositosEntityService.UpdateDepositos(depositosTO.ToDeposito());
         }
     }
 }

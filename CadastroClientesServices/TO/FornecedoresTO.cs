@@ -17,10 +17,6 @@
 
         public PessoaJuridica PessoaJuridica { get; set; }
 
-        public int? IdEndereco { get; set; }
-
-        public Endereco Endereco { get; set; }
-
         public bool? Excluido { get; set; }
 
         public DateTime? DataCadastro { get; set; }
